@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      WeatherWay
+      </ion-title>
+      <ion-button (click)="logout()" slot="end" fill="clear">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="gps()" fill="clear">
+        <ion-icon slot="icon-only" name="location-outline"></ion-icon>
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!--<ion-searchbar [(ngModel)]="city"></ion-searchbar>-->
+   
+    <ion-row>
+    <ion-col size="8">
+  <ion-item>
+    <ion-label>City:</ion-label>
+    <ion-input [(ngModel)]="city"></ion-input>
+  </ion-item>
+</ion-col>
+<ion-col size="4">
+  <ion-button expand="full" shape="round" (click)="fetchWeatherData()">
+    <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+  </ion-button>
+</ion-col>
+</ion-row>
+
+
+
+  <ion-card>
+    <ion-card-content>
+      <div class="image-container">
+        <img [src]="iconUrl" alt="Weather icon" class="large-icon">
+      </div>
+    </ion-card-content>
+ 
+      <ion-card-header>
+      <ion-card-title>{{ weatherData.weather[0].main }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+  <div  *ngIf="weatherData" >
+    <h2>Weather Information</h2>
+    <p>City: {{ weatherData.name }}</p>
+    <p>Temperature: {{ weatherData.main.temp }}°C</p>
+    <p>Weather: {{ weatherData.weather[0].description }}</p>
+    <p>Humidity: {{ weatherData.main.humidity }}</p>
+    <!-- Add more weather data properties as needed -->
+  </div>
+</ion-card-content>
+<ion-button (click)="addToFavorites()" fill="clear">
+  <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+</ion-button>
+</ion-card>
+</ion-content>
